@@ -8,11 +8,7 @@ const BASE_CATEGORIES = [
     name: 'Pizza',
     description: 'Hand-tossed bases, premium cheese, and bold toppings.',
   },
-  {
-    id: 'drinks',
-    name: 'Cold Drinks',
-    description: 'Chilled sodas, juices, and shakes to pair with every bite.',
-  },
+ 
   {
     id: 'breads',
     name: 'Breads',
@@ -22,30 +18,49 @@ const BASE_CATEGORIES = [
 
 export default function Welcome() {
   const [categoryImages, setCategoryImages] = useState({});
+  const [extraCategories, setExtraCategories] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     let cancelled = false;
 
-    async function loadImages() {
+    async function loadData() {
       try {
+        // existing custom images
         const images = await fetchCategoryImages();
+
+        // 🔥 fetch MealDB categories
+        const res = await fetch(
+          'https://www.themealdb.com/api/json/v1/1/categories.php'
+        );
+        const data = await res.json();
+
         if (!cancelled) {
           setCategoryImages(images);
+
+          // convert MealDB categories to your format
+          const formatted = data.categories.map((c) => ({
+            id: c.strCategory.toLowerCase(),
+            name: c.strCategory,
+            description: c.strCategoryDescription.slice(0, 90) + '...',
+            thumbnail: c.strCategoryThumb,
+          }));
+
+          setExtraCategories(formatted);
         }
       } finally {
-        if (!cancelled) {
-          setLoading(false);
-        }
+        if (!cancelled) setLoading(false);
       }
     }
 
-    loadImages();
+    loadData();
 
     return () => {
       cancelled = true;
     };
   }, []);
+
+  const allCategories = [...BASE_CATEGORIES, ...extraCategories];
 
   return (
     <div className="home">
@@ -73,32 +88,38 @@ export default function Welcome() {
           <h2>Brands & categories</h2>
           <p>Curated for quick decisions – pick your craving and start building your cart.</p>
         </header>
+
         <div className="category-grid">
-          {BASE_CATEGORIES.map((category) => {
+          {allCategories.map((category) => {
             const meal = categoryImages[category.id];
+
             return (
-            <article key={category.id} className="category-card">
-              {meal && (
+              <article key={category.id} className="category-card">
                 <div className="category-image-wrapper">
                   <img
-                    src={meal.thumbnail}
-                    alt={meal.name}
+                    src={category.thumbnail || meal?.thumbnail}
+                    alt={category.name}
                     className="category-image"
                     loading="lazy"
                   />
                 </div>
-              )}
-              <div className="category-header">
-                <div className="category-pill">{category.name}</div>
-                {meal && !loading && (
-                  <p className="category-meal-name">{meal.name}</p>
-                )}
-              </div>
-              <p>{category.description}</p>
-              <Link to="/menu" className="category-link">
-                View items
-              </Link>
-            </article>
+
+                <div className="category-header">
+                  <div className="category-pill">{category.name}</div>
+                  {meal && !loading && (
+                    <p className="category-meal-name">{meal.name}</p>
+                  )}
+                </div>
+
+                <p>{category.description}</p>
+
+                <Link
+                  to={`/menu?category=${category.name}`}
+                  className="category-link"
+                >
+                  View items
+                </Link>
+              </article>
             );
           })}
         </div>
@@ -106,4 +127,3 @@ export default function Welcome() {
     </div>
   );
 }
-
