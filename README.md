@@ -80,5 +80,23 @@ npm start
 
 ---
 
-## 📜 Note
-This project represents the MVP developed for a hackathon retail ordering problem statement.
+
+------FLOW CHART------
+
+
+
+User → Login/Register
+        ↓
+      Browse
+        ↓
+     Add to Cart
+        ↓
+     Checkout
+        ↓
+     Payment
+        ↓
+ Save Order + Update Inventory
+        ↓
+  Email Confirmation
+        ↓
+       End
