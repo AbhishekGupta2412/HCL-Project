@@ -3,7 +3,7 @@
  * Configure VITE_AUTH_API_URL in .env (e.g. http://localhost:8080)
  * or leave unset to use /api (Vite proxy to backend).
  */
-const AUTH_BASE = import.meta.env.VITE_AUTH_API_URL || '/api';
+const AUTH_BASE =  '/api';
 
 function getAuthHeaders() {
   const token = localStorage.getItem('smartbite_token');
