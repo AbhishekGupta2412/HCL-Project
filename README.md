@@ -60,24 +60,6 @@ End
 
 ---
 
-## ⚙️ Setup
-
-### Backend (Spring Boot)
-
-```bash
-cd backend
-mvn spring-boot:run
-```
-
-### Frontend
-
-```bash
-cd frontend
-npm install
-npm start
-```
-
----
 
 ## 🌐 API Used
 
