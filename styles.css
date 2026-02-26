@@ -1,0 +1,266 @@
+/* --- Variables --- */
+:root {
+  --bg: #0f0f12;
+  --surface: #18181d;
+  --surface-elevated: #222228;
+  --border: #2e2e36;
+  --text: #f4f4f5;
+  --text-muted: #a1a1aa;
+  --accent: #6366f1;
+  --accent-hover: #818cf8;
+  --accent-muted: rgba(99, 102, 241, 0.15);
+  --success: #22c55e;
+  --error: #ef4444;
+  --radius: 12px;
+  --radius-sm: 8px;
+  --shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  --font-sans: "Outfit", "DM Sans", system-ui, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Background pattern */
+.auth-layout,
+.welcome {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: 
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(99, 102, 241, 0.15), transparent),
+    radial-gradient(ellipse 60% 40% at 100% 0%, rgba(99, 102, 241, 0.08), transparent),
+    radial-gradient(ellipse 60% 40% at 0% 0%, rgba(99, 102, 241, 0.08), transparent),
+    var(--bg);
+}
+
+/* --- Cards --- */
+.auth-card,
+.welcome-card {
+  width: 100%;
+  max-width: 400px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem;
+  box-shadow: var(--shadow);
+}
+
+.welcome-card {
+  text-align: center;
+}
+
+.auth-card h1,
+.welcome-card h1 {
+  margin: 0 0 0.25rem;
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.auth-card .subtitle,
+.welcome-card .tagline {
+  margin: 0 0 1.75rem;
+  color: var(--text-muted);
+  font-size: 0.9375rem;
+}
+
+/* --- Form --- */
+.form-group {
+  margin-bottom: 1.25rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-family: inherit;
+  font-size: 1rem;
+  color: var(--text);
+  background: var(--surface-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-group input::placeholder {
+  color: var(--text-muted);
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-muted);
+}
+
+.form-group input:invalid:not(:placeholder-shown) {
+  border-color: var(--error);
+}
+
+.form-footer {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.form-footer .btn {
+  width: 100%;
+  padding: 0.75rem 1.25rem;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.form-footer .btn:active {
+  transform: scale(0.99);
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: white;
+}
+
+.btn-primary:hover {
+  background: var(--accent-hover);
+}
+
+.btn-secondary {
+  background: var(--surface-elevated);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.btn-secondary:hover {
+  background: var(--border);
+}
+
+/* --- Links --- */
+.auth-card a,
+.welcome-card a {
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.auth-card a:hover {
+  text-decoration: underline;
+}
+
+.auth-card .form-footer + .link-row,
+.link-row {
+  margin-top: 1.25rem;
+  text-align: center;
+}
+
+/* --- Buttons as links (welcome) --- */
+.welcome-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.welcome-actions .btn {
+  display: block;
+  padding: 0.75rem 1.25rem;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.welcome-actions .btn-primary {
+  background: var(--accent);
+  color: white;
+}
+
+.welcome-actions .btn-primary:hover {
+  background: var(--accent-hover);
+}
+
+.welcome-actions .btn-secondary {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.welcome-actions .btn-secondary:hover {
+  background: var(--surface-elevated);
+  border-color: var(--text-muted);
+}
+
+/* --- Back link --- */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  margin-bottom: 1.25rem;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  text-decoration: none;
+}
+
+.back-link:hover {
+  color: var(--text);
+}
+
+/* --- Divider --- */
+.divider {
+  margin: 1.25rem 0;
+  height: 1px;
+  background: var(--border);
+}
+
+/* --- Checkbox (signup) --- */
+.form-group.checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.form-group.checkbox input {
+  width: auto;
+  margin-top: 0.25rem;
+}
+
+.form-group.checkbox label {
+  margin-bottom: 0;
+  font-weight: 400;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+.form-group.checkbox a {
+  color: var(--accent);
+}
