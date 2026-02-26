@@ -19,23 +19,11 @@ This project was developed as a **Minimum Viable Product (MVP)** for a hackathon
 
 ## 🏗️ Tech Stack
 **Frontend:** React.js  
-**Backend:** Node.js & Express.js  
+**Backend:** Jav Spring boot
 **Database:** MongoDB  
 
 ---
 
-## ⚙️ Installation & Setup
-
-```bash
-git clone <your-repo-link>
-cd project
-
-# install dependencies
-npm install
-
-# start server
-npm start
-```
 
 ---
 
@@ -84,19 +72,42 @@ npm start
 ------FLOW CHART------
 
 
+## 🔄 System Workflow
 
-User → Login/Register
-        ↓
-      Browse
-        ↓
-     Add to Cart
-        ↓
-     Checkout
-        ↓
-     Payment
-        ↓
- Save Order + Update Inventory
-        ↓
-  Email Confirmation
-        ↓
-       End
+```
+Start
+  ↓
+User opens website
+  ↓
+Is user registered?
+   ├── No → Register
+   └── Yes → Login
+  ↓
+Authentication successful
+  ↓
+Browse products
+  ↓
+Select item
+  ↓
+Add to cart
+  ↓
+View / update cart
+  ↓
+Checkout
+  ↓
+Confirm order
+  ↓
+Payment successful?
+   ├── No → Show error
+   └── Yes → Save order in DB
+                ↓
+           Update inventory
+                ↓
+           Order success page
+                ↓
+               End
+```
+
+---
+
+
